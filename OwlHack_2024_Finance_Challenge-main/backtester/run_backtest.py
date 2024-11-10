@@ -20,6 +20,7 @@ import backtester
 # import YOUR strategies here
 from RSI_strategy import RSIStrategy
 from MACD_Strategy import MACDStrategy
+from ADX_strategy import ADXStrategy  # Import the ADXStrategy
 from random_strategy import RandomStrategy
 
 def create_strategy_list(pref, datamatrix_loader):
@@ -32,6 +33,10 @@ def create_strategy_list(pref, datamatrix_loader):
     
     macd = MACDStrategy(pref, dm, pref.initial_capital, target_gain_percentage=1.0, max_loss_percentage=-1.0, risk_allocation_percentage=10)
     result.append(macd)
+    
+    # Add ADXStrategy to the list
+    adx = ADXStrategy(pref, dm, pref.initial_capital, adx_threshold=25, target_gain_percentage=1.0, max_loss_percentage=-1.0, risk_allocation_percentage=10)
+    result.append(adx)
 
     random = RandomStrategy(pref, dm, pref.initial_capital, lower_bound = 0.1, upper_bound = 0.9)
     result.append(random)
